@@ -1,29 +1,59 @@
-<h1>Password Generator</h1>
+<div class="container">
+  <div class="columns is-centered">
+    <div class="box column is-one-third">
+      <h1 class="title has-text-centered">Password Generator</h1>
 
-<div>
-  <label>Enter length</label>
-  <input />
+      <div class="field">
+        <label>Length</label>
+        <input (input)="onChangeLength($any($event.target).value)" />
+        <!-- $any is for binding expressions to disable type checking of this expression -->
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input (change)="onChangeUseLetters()" type="checkbox" />
+            Use Letters
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input (change)="onChangeUseNumbers()" type="checkbox" />
+            Use Numbers
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input (change)="onChangeUseSymbols()" type="checkbox" />
+            Use Symbols
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <button
+          [disabled]="
+            !(length && (includeLetters || includeNumbers || includeSymbols))
+          "
+          (click)="onButtonClick()"
+          class="button is-link is-fullwidth"
+        >
+          Generate!
+        </button>
+        <!-- check if user enter input and checkbox  -->
+      </div>
+
+      <div class="box" *ngIf="password">
+        <label>Your Password</label>
+        <input class="input" [value]="password" />
+        <div></div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<div>
-  <label for="">Use letters</label>
-  <input type='checkbox' />
-</div>
-
-<div>
-  <label for="">Use numbers</label>
-  <input type='checkbox' />
-</div>
-
-<div>
-  <label for="">Use symbols</label>
-  <input type='checkbox' />
-</div>
-
-<div><button> Generate!</button></div>
-
-<div>
-  <label for="">Your Password</label>
-<input />
-</div>
-cc
